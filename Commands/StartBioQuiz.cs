@@ -17,22 +17,30 @@ namespace ConsoleApp6.Commands
 
         public StartBioQuiz(Biolige bioQu)
         {
-            using (Stream FileS = File.OpenRead("Biolige.txt"))
+            try
             {
-                try
+                const string Path = "Biolige.txt";
+                using (Stream FileS = File.OpenRead(Path))
                 {
-                    BinaryFormatter Serializer = new BinaryFormatter();
-                    bioQu = (Biolige)Serializer.Deserialize(FileS);
+                    try
+                    {
+                        BinaryFormatter Serializer = new BinaryFormatter();
+                        bioQu = (Biolige)Serializer.Deserialize(FileS);
+                    }
+                    catch (SerializationException e)
+                    {
+                        WriteLine("Failed to deserialize. Reason: " + e.Message);
+                        throw;
+                    }
                 }
-                catch (SerializationException e)
+                foreach (var count in bioQu.quations)
                 {
-                    Console.WriteLine("Failed to deserialize. Reason: " + e.Message);
-                    throw;
+                    this.bioQu = bioQu;
                 }
             }
-            foreach (var count in bioQu.quations)
+            catch
             {
-                this.bioQu = bioQu;
+                WriteLine("Викторина по биологии не найдена!Пожалуйста создайте её и перезапустите программу\n");
             }
         }
 

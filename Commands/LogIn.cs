@@ -19,24 +19,35 @@ namespace ConsoleApp6.Commands
 
         public LogIn(Dictionary<string, User> users, CurrentUser currentUser)
         {
-            using (Stream FileS = File.OpenRead("Users.txt"))
+            try
             {
-                try
+                using (Stream FileS = File.OpenRead("Users.txt"))
                 {
-                    BinaryFormatter Serializer = new BinaryFormatter();
-                    users = (Dictionary<string, User>)Serializer.Deserialize(FileS);
+                    try
+                    {
+                        BinaryFormatter Serializer = new BinaryFormatter();
+                        users = (Dictionary<string, User>)Serializer.Deserialize(FileS);
+                    }
+                    catch (SerializationException e)
+                    {
+                        WriteLine("Failed to deserialize. Reason: " + e.Message);
+                        throw;
+                    }
                 }
-                catch (SerializationException e)
+                foreach (var count in users)
                 {
-                    Console.WriteLine("Failed to deserialize. Reason: " + e.Message);
-                    throw;
+                    this.users = users;
                 }
+                this.currentUser = currentUser;
             }
-            foreach (var count in users)
+            catch
             {
-                this.users = users;
+                using (Stream FileS = File.OpenWrite("Users.txt"))
+                {
+                    //Небольшой костыль чтобы избежать вылета при первом запуске
+                }
+
             }
-            this.currentUser = currentUser;
         }
 
         public bool CanRun(string input)

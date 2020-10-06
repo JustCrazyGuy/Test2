@@ -29,7 +29,8 @@ namespace ConsoleApp6.Commands
         public string Run(string input, ref bool isExit)
         {
             BinaryFormatter serializer = new BinaryFormatter();
-            using (Stream FileS = File.OpenWrite("Biolige.txt"))
+            const string Path = "Biolige.txt";
+            using (Stream FileS = File.OpenWrite(Path))
             {
                 serializer.Serialize(FileS, BioQu.quations);
             }

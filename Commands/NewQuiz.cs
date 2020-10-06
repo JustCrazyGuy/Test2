@@ -44,9 +44,11 @@ namespace ConsoleApp6.Commands
                 {
                     return "Ошибка ввода";
                 }
-                for (int i = 0; i < 20; i++)
+                //for (int i = 0; i < 20; i++)
+                for (int i = 0; i < 2; i++)
+
                 {
-                WriteLine("Введите Вопрос: ");
+                    WriteLine("Введите Вопрос: ");
                 quation = ReadLine();
                 quation.Trim();
                     do

@@ -29,6 +29,7 @@ namespace ConsoleApp6
             nonLogUser.Add(new Register(users));
             nonLogUser.Add(new ExitCommand());
 
+            logUser.Add(new StartBioQuiz(biolige));
             logUser.Add(new NewQuiz(biolige, history));
             logUser.Add(new SaveInFileHistory(history));
             logUser.Add(new SaveInFileBiolige(biolige));
@@ -40,6 +41,7 @@ namespace ConsoleApp6
             logUser.Add(new ChangePassword(users));
             logUser.Add(new ChangeBirthday(users));
             logUser.Add(new ExitCommand());
+
             do
             {
                 if (currentUser.user != null) {
