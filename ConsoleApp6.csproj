@@ -57,6 +57,7 @@
     <Compile Include="Commands\Register.cs" />
     <Compile Include="Commands\SaveFileBiolige.cs" />
     <Compile Include="Commands\SaveInFileHistory.cs" />
+    <Compile Include="Commands\StartBioQuiz.cs" />
     <Compile Include="Entity\CurrentUser.cs" />
     <Compile Include="Entity\User.cs" />
     <Compile Include="Program.cs" />
