@@ -1,7 +1,10 @@
 ﻿using ConsoleApp6.Entity;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Console;
@@ -46,6 +49,20 @@ namespace ConsoleApp6.Commands
             else
             {
                 users.Add(user.Login, user);
+                BinaryFormatter serializer = new BinaryFormatter();
+
+                using (Stream FileS = File.OpenWrite("Users.txt"))
+                {
+                    try
+                    {
+                        serializer.Serialize(FileS, users);
+                    }
+                    catch (SerializationException e)
+                    {
+                        WriteLine("Failed to serialize. Reason: " + e.Message);
+                        throw;
+                    }
+                }
                 return " Регистрация прошла успешно";
             }
            

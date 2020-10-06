@@ -1,7 +1,11 @@
 ﻿using ConsoleApp6.Entity;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Console;
@@ -15,7 +19,23 @@ namespace ConsoleApp6.Commands
 
         public LogIn(Dictionary<string, User> users, CurrentUser currentUser)
         {
-            this.users = users;
+            using (Stream FileS = File.OpenRead("Users.txt"))
+            {
+                try
+                {
+                    BinaryFormatter Serializer = new BinaryFormatter();
+                    users = (Dictionary<string, User>)Serializer.Deserialize(FileS);
+                }
+                catch (SerializationException e)
+                {
+                    Console.WriteLine("Failed to deserialize. Reason: " + e.Message);
+                    throw;
+                }
+            }
+            foreach (var count in users)
+            {
+                this.users = users;
+            }
             this.currentUser = currentUser;
         }
 
@@ -38,12 +58,15 @@ namespace ConsoleApp6.Commands
             currentPassword = ReadLine();
 
             User user;
+           
+
             users.TryGetValue(currentLogin, out user);
 
             if (!users.TryGetValue(currentLogin, out user ) || currentPassword!=user.Password)
             {
                 return "Логин или пароль неверны!";
             }
+           
             currentUser.user = user;
                 return "Добро Пожаловать! " + user.Login;
         }

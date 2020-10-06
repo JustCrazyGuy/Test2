@@ -14,5 +14,9 @@ namespace ConsoleApp6.Entity
         public string Password { get; set; }
         public DateTime Birthday { get; set; }
 
+        public static implicit operator Dictionary<object, object>(User v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
