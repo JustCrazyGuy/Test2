@@ -11,11 +11,11 @@ namespace ConsoleApp6.Commands
 {
     class SaveInFileBiolige : ICommand
     {
-        private readonly Biolige BioQu;
+        private readonly Quiz Quast;
 
-        public SaveInFileBiolige(Biolige BioQu)
+        public SaveInFileBiolige(Quiz Quast)
         {
-            this.BioQu = BioQu;
+            this.Quast = Quast;
         }
         public bool CanRun(string input)
         {
@@ -30,9 +30,10 @@ namespace ConsoleApp6.Commands
         {
             BinaryFormatter serializer = new BinaryFormatter();
             const string Path = "Biolige.txt";
-            using (Stream FileS = File.OpenWrite(Path))
+            
+            using (Stream FileS = File.OpenWrite(Path.ToLower()))
             {
-                serializer.Serialize(FileS, BioQu.quations);
+                serializer.Serialize(FileS, Quast.biolige);
             }
             return "Сохранение прошло успешно\n";
         }

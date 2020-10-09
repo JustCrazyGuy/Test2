@@ -62,8 +62,7 @@
     <Compile Include="Entity\User.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Victoryns\Biolige.cs" />
-    <Compile Include="Victoryns\History.cs" />
+    <Compile Include="Victoryns\Quiz.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

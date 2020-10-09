@@ -10,11 +10,11 @@ namespace ConsoleApp6.Commands
 {
     class ChangeAnswersInBiolige : ICommand
     {
-        private readonly Biolige BioQu;
+        private readonly Quiz Quast;
 
-        public ChangeAnswersInBiolige(Biolige BioQu)
+        public ChangeAnswersInBiolige(Quiz Quast)
         {
-            this.BioQu = BioQu;
+            this.Quast = Quast;
         }
 
         public bool CanRun(string input)
@@ -36,9 +36,9 @@ namespace ConsoleApp6.Commands
             string currentWord = ReadLine();
             List<int> NewWords = new List<int>();
 
-            BioQu.quations.TryGetValue(currentWord, out busket);
+            Quast.biolige.TryGetValue(currentWord, out busket);
 
-            if (!BioQu.quations.ContainsKey(currentWord))
+            if (!Quast.biolige.ContainsKey(currentWord))
             {
 
                 return "Вопрос не найден";
@@ -52,8 +52,8 @@ namespace ConsoleApp6.Commands
             WriteLine("Введите новый ответ: ");
             busket.Add(Convert.ToInt32(ReadLine()));
             string currentWord2 = currentWord;
-            BioQu.quations.Remove(currentWord);
-            BioQu.quations.Add(currentWord2, busket);
+            Quast.biolige.Remove(currentWord);
+            Quast.biolige.Add(currentWord2, busket);
             return "Ответ успешно изменён!";
         }
     }

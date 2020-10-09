@@ -10,13 +10,11 @@ namespace ConsoleApp6.Commands
 {
     class NewQuiz : ICommand
     {
-        private readonly Biolige BioQu;
-        private readonly History HistQu;
+        private readonly Quiz Quast;
 
-        public NewQuiz(Biolige BioQu, History HistQu)
+        public NewQuiz(Quiz Quast)
         {
-            this.BioQu = BioQu;
-            this.HistQu = HistQu;
+            this.Quast = Quast;
         }
       
 
@@ -73,11 +71,11 @@ namespace ConsoleApp6.Commands
                     EndWords = true;
                     if (key1 == 1)
                     {
-                        HistQu.quations.Add(quation, Answers);
+                        Quast.history.Add(quation, Answers);
                     }
                     else
                     {
-                        BioQu.quations.Add(quation, Answers);
+                        Quast.biolige.Add(quation, Answers);
                     }
                 }
             }

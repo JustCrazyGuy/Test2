@@ -10,11 +10,11 @@ namespace ConsoleApp6.Commands
 {
     class ChangeAnswersInHistory : ICommand
     {
-        private readonly History HistQu;
+        private readonly Quiz Quast;
 
-        public ChangeAnswersInHistory(History HistQu)
+        public ChangeAnswersInHistory(Quiz Quast)
         {
-            this.HistQu = HistQu;
+            this.Quast = Quast;
         }
 
         public bool CanRun(string input)
@@ -36,9 +36,9 @@ namespace ConsoleApp6.Commands
             string currentWord = ReadLine();
             List<int> NewWords = new List<int>();
 
-            HistQu.quations.TryGetValue(currentWord, out busket);
+            Quast.history.TryGetValue(currentWord, out busket);
 
-            if (!HistQu.quations.ContainsKey(currentWord))
+            if (!Quast.history.ContainsKey(currentWord))
             {
 
                 return "Вопрос не найден";
@@ -52,8 +52,8 @@ namespace ConsoleApp6.Commands
             WriteLine("Введите новый ответ: ");
             busket.Add(Convert.ToInt32(ReadLine()));
             string currentWord2 = currentWord;
-            HistQu.quations.Remove(currentWord);
-            HistQu.quations.Add(currentWord2, busket);
+            Quast.history.Remove(currentWord);
+            Quast.history.Add(currentWord2, busket);
             return "Ответ успешно изменён!";
         }
     }

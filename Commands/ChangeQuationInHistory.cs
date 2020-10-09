@@ -10,13 +10,12 @@ namespace ConsoleApp6.Commands
 {
     class ChangeQuationInHistory : ICommand
     {
-        private readonly History HistQu;
+        private readonly Quiz Quast;
 
-        public ChangeQuationInHistory(History HistQu)
+        public ChangeQuationInHistory(Quiz Quast)
         {
-            this.HistQu = HistQu;
+            this.Quast = Quast;
         }
-
         public bool CanRun(string input)
         {
             return input == "ChangeQHist";
@@ -33,17 +32,17 @@ namespace ConsoleApp6.Commands
             WriteLine("Введите вопрос который хотите изменить: ");
             string currentWord = ReadLine();
 
-            if (!HistQu.quations.ContainsKey(currentWord))
+            if (!Quast.history.ContainsKey(currentWord))
             {
                 return "Вопрос не найден";
             }
 
-            HistQu.quations.TryGetValue(currentWord, out busket);
-            HistQu.quations.Remove(currentWord);
+            Quast.history.TryGetValue(currentWord, out busket);
+            Quast.history.Remove(currentWord);
 
             WriteLine("Вопрос найден,введите новый");
             currentWord = ReadLine();
-            HistQu.quations.Add(currentWord, busket);
+            Quast.history.Add(currentWord, busket);
 
             return "Вопрос успешно изменен!";
         }

@@ -13,9 +13,9 @@ namespace ConsoleApp6.Commands
 {
     class StartBioQuiz : ICommand
     {
-        private readonly Biolige bioQu;
+        private readonly Quiz quast;
 
-        public StartBioQuiz(Biolige bioQu)
+        public StartBioQuiz(Quiz quast)
         {
             try
             {
@@ -25,7 +25,7 @@ namespace ConsoleApp6.Commands
                     try
                     {
                         BinaryFormatter Serializer = new BinaryFormatter();
-                        bioQu = (Biolige)Serializer.Deserialize(FileS);
+                        quast.biolige = (Dictionary<string, List<int>>)Serializer.Deserialize(FileS);
                     }
                     catch (SerializationException e)
                     {
@@ -33,9 +33,9 @@ namespace ConsoleApp6.Commands
                         throw;
                     }
                 }
-                foreach (var count in bioQu.quations)
+                foreach (var count in quast.biolige)
                 {
-                    this.bioQu = bioQu;
+                    this.quast.biolige = quast.biolige;
                 }
             }
             catch
@@ -62,10 +62,10 @@ namespace ConsoleApp6.Commands
             int niceAnswer = 0;
             bool reallyAnswer = false;
             bool endAnswer = false;
-            foreach(var count in bioQu.quations)
+            foreach(var count in quast.biolige)
             {
-                bioQu.quations.TryGetValue(bioQu.quations.Keys.ToString(), out answer);
-                WriteLine(bioQu.quations.Keys);
+                quast.biolige.TryGetValue(quast.biolige.Keys.ToString(), out answer);
+                WriteLine(quast.biolige.Keys);
                 do
                 {
                     yourAnswer = Convert.ToInt32(ReadLine());
@@ -82,7 +82,7 @@ namespace ConsoleApp6.Commands
                     reallyAnswer = false;
                 }
             }
-            return "Конец! ваши баллы: " + reallyAnswer.ToString() + "из " + bioQu.quations.Count.ToString();
+            return "Конец! ваши баллы: " + reallyAnswer.ToString() + "из " + quast.biolige.Count.ToString();
         }
     }
 }

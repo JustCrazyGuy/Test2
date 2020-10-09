@@ -11,11 +11,11 @@ namespace ConsoleApp6.Commands
 {
     class SaveInFileHistory : ICommand
     {
-        private readonly History HistQu ;
+        private readonly Quiz Quast;
 
-        public SaveInFileHistory(History HistQu)
+        public SaveInFileHistory(Quiz Quast)
         {
-            this.HistQu = HistQu;
+            this.Quast = Quast;
         }
         public bool CanRun(string input)
         {
@@ -31,7 +31,7 @@ namespace ConsoleApp6.Commands
             BinaryFormatter serializer = new BinaryFormatter();
             using (Stream FileS = File.OpenWrite("History.txt"))
             {
-                serializer.Serialize(FileS, HistQu.quations);
+                serializer.Serialize(FileS, Quast.history);
             }
             return "Сохранение прошло успешно\n";
         }

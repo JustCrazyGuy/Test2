@@ -11,12 +11,11 @@ namespace ConsoleApp6.Commands
 {
     class LoadFromFile : ICommand
     {
-        private readonly Biolige Bio;
-        private readonly History Hist;
-        public LoadFromFile(Biolige Dictionary, History Dictionary2)
+        private readonly Quiz Quast;
+
+        public LoadFromFile(Quiz Quast)
         {
-            this.Bio = Dictionary;
-            this.Hist = Dictionary2;
+            this.Quast = Quast;
         }
 
         public bool CanRun(string input)
@@ -31,19 +30,19 @@ namespace ConsoleApp6.Commands
         }
         public string Run(string input, ref bool isExit)
         {
-            Biolige BuffDictionary1 = new Biolige();
-            History BuffDictionary2 = new History();
+            Quiz BuffDictionary1 = new Quiz();
+            Quiz BuffDictionary2 = new Quiz();
             BinaryFormatter Serializer = new BinaryFormatter();
             using (Stream FileS = File.OpenRead("Biolige.txt"))
             {
-                BuffDictionary1 = Serializer.Deserialize(FileS) as Biolige;
+                BuffDictionary1 = Serializer.Deserialize(FileS) as Quiz;
             }
-            Bio.quations = BuffDictionary1.quations;
+            Quast.biolige = BuffDictionary1.biolige;
             using (Stream FileS = File.OpenRead("History.txt"))
             {
-                BuffDictionary2 = Serializer.Deserialize(FileS) as History;
+                BuffDictionary2 = Serializer.Deserialize(FileS) as Quiz;
             }
-            Hist.quations = BuffDictionary2.quations;
+            Quast.history = BuffDictionary2.history;
             return "Загрузка прошло успешно\n";
         }
     }

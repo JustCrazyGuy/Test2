@@ -18,8 +18,7 @@ namespace ConsoleApp6
             bool isExit = false;
             string input;
             string commandResult;
-            Biolige biolige = new Biolige();
-            History history = new History();
+            Quiz quiz = new Quiz();
             List<ICommand> commands;
             List<ICommand> nonLogUser = new List<ICommand>();
             List<ICommand> logUser = new List<ICommand>();
@@ -29,15 +28,15 @@ namespace ConsoleApp6
             nonLogUser.Add(new Register(users));
             nonLogUser.Add(new ExitCommand());
 
-            logUser.Add(new StartBioQuiz(biolige));
-            logUser.Add(new NewQuiz(biolige, history));
-            logUser.Add(new SaveInFileHistory(history));
-            logUser.Add(new SaveInFileBiolige(biolige));
-            logUser.Add(new LoadFromFile(biolige,history));
-            logUser.Add(new ChangeQuationInHistory(history));
-            logUser.Add(new ChangeAnswersInHistory(history));
-            logUser.Add(new ChangeQuationInBiolige(biolige));
-            logUser.Add(new ChangeAnswersInBiolige(biolige));
+            logUser.Add(new StartBioQuiz(quiz));
+            logUser.Add(new NewQuiz(quiz));
+            logUser.Add(new SaveInFileHistory(quiz));
+            logUser.Add(new SaveInFileBiolige(quiz));
+            logUser.Add(new LoadFromFile(quiz));
+            logUser.Add(new ChangeQuationInHistory(quiz));
+            logUser.Add(new ChangeAnswersInHistory(quiz));
+            logUser.Add(new ChangeQuationInBiolige(quiz));
+            logUser.Add(new ChangeAnswersInBiolige(quiz));
             logUser.Add(new ChangePassword(users));
             logUser.Add(new ChangeBirthday(users));
             logUser.Add(new ExitCommand());
